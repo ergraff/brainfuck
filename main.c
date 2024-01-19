@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "instructions.h"
 /* Lazy early test */
 #define MAX_PROG_LEN 1000
 
@@ -44,6 +45,15 @@ int main(int argc, char **argv)
     strcat(content, line);
   };
   printf("%s", content);
+
+  // DEBUG check includes
+  right();
+  left();
+  inc();
+  dec();
+  out();
+  in();
+  bracket();
 
   return 0;
 }
