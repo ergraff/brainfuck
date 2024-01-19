@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "program.h"
 #include "instructions.h"
+
 /* Lazy early test */
 #define MAX_PROG_LEN 1000
 
@@ -54,6 +56,7 @@ int main(int argc, char **argv)
   out();
   in();
   bracket();
+  program();
 
   return 0;
 }
