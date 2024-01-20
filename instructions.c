@@ -1,36 +1,48 @@
+#ifndef _STDIO_H
+#include <stdio.h>
+#endif
+
 #include "instructions.h"
 
-void right(void)
+// Move right
+void right(char *p)
 {
-  
+  ++p;
 }
 
-void left(void)
+// Move left
+void left(char *p)
 {
-
+  --p;
 }
 
-void inc(void)
+// Increment cell
+void inc(char *p)
 {
-  
+  ++*p;
 }
 
-void dec(void)
+// Decrement cell
+void dec(char *p)
 {
-  
+  --*p;
 }
 
-void out(void)
+// Output cell
+void out(char *p)
 {
-  
+  printf("Out: %d (dec), %c (ascii)\n", *p);
 }
 
-void in(void)
+// Read input to cell
+void in(char *p)
 {
-  
+  scanf("%c", p);
 }
 
-void bracket(void)
+// TODO
+// Brackets
+void bracket(char *p)
 {
-  
+
 }

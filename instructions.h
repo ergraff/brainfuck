@@ -1,12 +1,12 @@
 #ifndef INSTRUCTIONS_H_
 #define INSTRUCTIONS_H_
 
-void right(void);
-void left(void);
-void inc(void);
-void dec(void);
-void out(void);
-void in(void);
-void bracket(void);
+void right(char *p);
+void left(char *p);
+void inc(char *p);
+void dec(char *p);
+void out(char *p);
+void in(char *p);
+void bracket(char *p);
 
 #endif
