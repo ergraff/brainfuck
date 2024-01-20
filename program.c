@@ -5,10 +5,10 @@
 #include "program.h"
 #include "instructions.h"
 
-void read_instruction(char c, char *p)
+void read_instruction(char **code, char **p)
 {
-  // printf("Reading: %c\n", c); // DEBUG
-  switch (c)
+  // printf("DEBUG Reading: %c\n", **code); // DEBUG
+  switch (**code)
   {
     case '>':
       right(p);
@@ -29,7 +29,10 @@ void read_instruction(char c, char *p)
       in(p);
       break;
     case '[':
-      bracket(p);
+      bracket_left(code, p);
+      break;
+    case ']':
+      bracket_right(code, p);
       break;
   }
   

@@ -4,22 +4,13 @@
 
 #include "program.h"
 
-/* Lazy early test */
+// Lazy
 #define MAX_PROG_LEN 1000
+
 #define MEMORY_SIZE 30000
 
 int main(int argc, char **argv)
 {
-  // DEBUG check includes
-  // right();
-  // left();
-  // inc();
-  // dec();
-  // out();
-  // in();
-  // bracket();
-  // interpret();
-
   // Check arguments
   if (argc < 2)
   {
@@ -73,18 +64,21 @@ int main(int argc, char **argv)
   }
 
   // DEBUG print program
-  printf("\nProgram: %s\n", code);
+  printf("\nDEBUG Program: %s\n", code); // DEBUG
 
   // Run program
-  printf("Output:\n");
+  printf("DEBUG Output:\n"); // DEBUG
   while(*code)
   {
-    // printf("Current: %c\n", *code); // DEBUG
+    // printf("DEBUG Current: %c\n", *code); // DEBUG
 
     // Read instruction
-    read_instruction(*code, p);
+    read_instruction(&code, &p);
+    // printf("DEBUG *code = '%c'\n", *code); // DEBUG
 
     // Increment to next instruction
-    ++code;
+    code++;
   }
+
+  printf("DEBUG Program end\n"); // DEBUG
 }
