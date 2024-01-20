@@ -1,24 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
-#include "program.h"
+#include "instructions.h"
 
-// Lazy
 #define MAX_PROG_LEN 1000
-
 #define MEMORY_SIZE 30000
 
 int main(int argc, char **argv)
 {
   // Check arguments
-  if (argc < 2)
+  if(argc < 2)
   {
     // No arguments
     printf("No argument was given!\n");
     return 1;
   }
-  if (argc > 2)
+  if(argc > 2)
   {
     // Too many arguments
     printf("Only one argument is expected!\n");
@@ -26,14 +23,14 @@ int main(int argc, char **argv)
   }
 
   // DEBUG print argv
-  for (int i = 0; i < argc; i++)
+  for(int i = 0; i < argc; i++)
   {
     printf("argv[%d]: %s\n", i, argv[i]);
   }
 
   // Open file
   FILE *file = fopen(argv[1], "r");
-  if (file == NULL)
+  if(file == NULL)
   {
     printf("Error opening file '%s'!\n", argv[1]);
     return 1;
@@ -41,7 +38,7 @@ int main(int argc, char **argv)
 
   // Initialize program string and memory pointers
   char *code =  (char*) malloc(MAX_PROG_LEN + 1);
-  char *p = (char*) malloc(MEMORY_SIZE);
+  char *mem = (char*) malloc(MEMORY_SIZE);
   
   // Read content of program file to string
   char *c = code;
@@ -64,21 +61,21 @@ int main(int argc, char **argv)
   }
 
   // DEBUG print program
-  printf("\nDEBUG Program: %s\n", code); // DEBUG
+  printf("\nDEBUG Program:\n%s\n", code); // DEBUG
 
   // Run program
-  printf("DEBUG Output:\n"); // DEBUG
+  // printf("DEBUG Output:\n"); // DEBUG
   while(*code)
   {
     // printf("DEBUG Current: %c\n", *code); // DEBUG
 
     // Read instruction
-    read_instruction(&code, &p);
+    read_instruction(&code, &mem);
     // printf("DEBUG *code = '%c'\n", *code); // DEBUG
 
     // Increment to next instruction
     code++;
   }
 
-  printf("DEBUG Program end\n"); // DEBUG
+  printf("\nDEBUG Program end\n"); // DEBUG
 }

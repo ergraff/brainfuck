@@ -5,78 +5,109 @@
 #include "instructions.h"
 
 // Move right
-void right(char **p)
+void right(ARG_MEM_PTR)
 {
-  ++*p;
+  MEM_RIGHT;
 }
 
 // Move left
-void left(char **p)
+void left(ARG_MEM_PTR)
 {
-  --*p;
+  MEM_LEFT;
 }
 
 // Increment cell
-void inc(char **p)
+void inc(ARG_MEM_PTR)
 {
-  ++**p;
+  MEM_INC;
 }
 
 // Decrement cell
-void dec(char **p)
+void dec(ARG_MEM_PTR)
 {
-  --**p;
+  MEM_DEC;
 }
 
 // Output cell
-void out(char **p)
+void out(ARG_MEM_PTR)
 {
-  printf("DEBUG Out: %d (dec), %c (ascii)\n", **p, **p); // DEBUG
-  // printf("%c\n", **p);
+  printf("DEBUG Out: %d\t(dec)\t%c\t(ascii)\n", MEM_VAL, MEM_VAL); // DEBUG
+  // printf("%c", MEM_VAL);
 }
 
 // Read input to cell
-void in(char **p)
+void in(ARG_MEM_PTR)
 {
-  scanf("%c", *p);
+  scanf("%c", MEM_IN_PTR);
 }
 
-// TODO
 // Left bracket
-void bracket_left(char **code, char **p)
+void bracket_left(ARG_CODE_PTR, ARG_MEM_PTR)
 {
-  if (**p == 0)
+  if(MEM_VAL == 0)
   {
     // printf("DEBUG Moving forward to matching bracket\n"); // DEBUG
     // Go to next matching bracket
     int counter = 1;
-    while ( **code != ']' && counter != 0 )
+    while ( CODE_VAL != R_BRACK && counter != 0 )
     {
       ++*code;
       // printf("DEBUG %c\n", **code); // DEBUG
-      if (**code == '[') counter ++;
-      if (**code == ']') counter --;
+      if(CODE_VAL == L_BRACK) counter ++;
+      if(CODE_VAL == R_BRACK) counter --;
     }
     // printf("DEBUG Found matching bracket ']'. **code = '%c'\n", **code); // DEBUG
   }
 }
 
-// TODO
 // Right bracket
-void bracket_right(char **code, char **p)
+void bracket_right(ARG_CODE_PTR, ARG_MEM_PTR)
 {
-  if (**p != 0)
+  if(MEM_VAL != 0)
   {
     // printf("DEBUG Moving back to matching bracket\n"); // DEBUG
     // Go to previous matching bracket
     int counter = 1;
-    while ( **code != '[' && counter != 0 )
+    while( CODE_VAL != L_BRACK && counter != 0 )
     {
       // printf("DEBUG %c\n", **code); // DEBUG
       --*code;
-      if (**code == ']') counter++;
-      if (**code == '[') counter--;
+      if(CODE_VAL == R_BRACK) counter++;
+      if(CODE_VAL == L_BRACK) counter--;
     }
     // printf("DEBUG Found matching bracket '['. **code = '%c'\n", **code); // DEBUG
+  }
+}
+
+// Read instruction
+void read_instruction(ARG_CODE_PTR, ARG_MEM_PTR)
+{
+  // printf("DEBUG Reading: %c\n", CODE_VAL); // DEBUG
+  switch(CODE_VAL)
+  {
+    case RIGHT:
+      right(MEM_PTR);
+      break;
+    case LEFT:
+      left(MEM_PTR);
+      break;
+    case INC:
+      inc(MEM_PTR);
+      break;
+    case DEC:
+      dec(MEM_PTR);
+      break;
+    case OUT:
+      out(MEM_PTR);
+      break;
+    case IN:
+      in(MEM_PTR);
+      break;
+    case L_BRACK:
+      bracket_left(CODE_PTR, MEM_PTR);
+      break;
+    case R_BRACK:
+      bracket_right(CODE_PTR, MEM_PTR);
+      break;
   }
 }
