@@ -22,12 +22,6 @@ int main(int argc, char **argv)
     return 1;
   }
 
-  // DEBUG print argv
-  for(int i = 0; i < argc; i++)
-  {
-    printf("argv[%d]: %s\n", i, argv[i]);
-  }
-
   // Open file
   FILE *file = fopen(argv[1], "r");
   if(file == NULL)
@@ -60,22 +54,13 @@ int main(int argc, char **argv)
     }
   }
 
-  // DEBUG print program
-  printf("\nDEBUG Program:\n%s\n", code); // DEBUG
-
   // Run program
-  // printf("DEBUG Output:\n"); // DEBUG
   while(*code)
   {
-    // printf("DEBUG Current: %c\n", *code); // DEBUG
-
     // Read instruction
     read_instruction(&code, &mem);
-    // printf("DEBUG *code = '%c'\n", *code); // DEBUG
 
     // Increment to next instruction
     code++;
   }
-
-  printf("\nDEBUG Program end\n"); // DEBUG
 }

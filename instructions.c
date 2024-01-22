@@ -31,8 +31,7 @@ void dec(ARG_MEM_PTR)
 // Output cell
 void out(ARG_MEM_PTR)
 {
-  printf("DEBUG Out: %d\t(dec)\t%c\t(ascii)\n", MEM_VAL, MEM_VAL); // DEBUG
-  // printf("%c", MEM_VAL);
+  printf("%c", MEM_VAL);
 }
 
 // Read input to cell
@@ -46,17 +45,14 @@ void bracket_left(ARG_CODE_PTR, ARG_MEM_PTR)
 {
   if(MEM_VAL == 0)
   {
-    // printf("DEBUG Moving forward to matching bracket\n"); // DEBUG
     // Go to next matching bracket
     int counter = 1;
     while ( CODE_VAL != R_BRACK || counter != 0 )
     {
       ++*code;
-      // printf("DEBUG %c\n", **code); // DEBUG
       if(CODE_VAL == L_BRACK) counter ++;
       if(CODE_VAL == R_BRACK) counter --;
     }
-    // printf("DEBUG Found matching bracket ']'. **code = '%c'\n", **code); // DEBUG
   }
 }
 
@@ -65,24 +61,20 @@ void bracket_right(ARG_CODE_PTR, ARG_MEM_PTR)
 {
   if(MEM_VAL != 0)
   {
-    // printf("DEBUG Moving back to matching bracket\n"); // DEBUG
     // Go to previous matching bracket
     int counter = 1;
     while( CODE_VAL != L_BRACK || counter != 0 )
     {
-      // printf("DEBUG %c\n", **code); // DEBUG
       --*code;
       if(CODE_VAL == R_BRACK) counter++;
       if(CODE_VAL == L_BRACK) counter--;
     }
-    // printf("DEBUG Found matching bracket '['. **code = '%c'\n", **code); // DEBUG
   }
 }
 
 // Read instruction
 void read_instruction(ARG_CODE_PTR, ARG_MEM_PTR)
 {
-  // printf("DEBUG Reading: %c\n", CODE_VAL); // DEBUG
   switch(CODE_VAL)
   {
     case RIGHT:
