@@ -49,7 +49,7 @@ void bracket_left(ARG_CODE_PTR, ARG_MEM_PTR)
     // printf("DEBUG Moving forward to matching bracket\n"); // DEBUG
     // Go to next matching bracket
     int counter = 1;
-    while ( CODE_VAL != R_BRACK && counter != 0 )
+    while ( CODE_VAL != R_BRACK || counter != 0 )
     {
       ++*code;
       // printf("DEBUG %c\n", **code); // DEBUG
@@ -68,7 +68,7 @@ void bracket_right(ARG_CODE_PTR, ARG_MEM_PTR)
     // printf("DEBUG Moving back to matching bracket\n"); // DEBUG
     // Go to previous matching bracket
     int counter = 1;
-    while( CODE_VAL != L_BRACK && counter != 0 )
+    while( CODE_VAL != L_BRACK || counter != 0 )
     {
       // printf("DEBUG %c\n", **code); // DEBUG
       --*code;
