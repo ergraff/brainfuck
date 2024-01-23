@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "instructions.h"
 
@@ -20,6 +21,13 @@ int main(int argc, char **argv)
     // Too many arguments
     printf("Only one argument is expected!\n");
     return 1;
+  }
+
+  // --help message
+  if(strcmp(argv[1], "--help") == 0)
+  {
+    printf("use: (./)brainfuck <path>\n\nExample:\n(./)brainfuck examples/helloworld1.bf\n");
+    return 0;
   }
 
   // Open file
@@ -63,4 +71,6 @@ int main(int argc, char **argv)
     // Increment to next instruction
     code++;
   }
+
+  return 0;
 }
