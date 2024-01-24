@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "instructions.h"
-
 #define MAX_PROG_LEN 1000
 #define MEMORY_SIZE 30000
 
@@ -26,7 +24,7 @@ int main(int argc, char **argv)
   // --help message
   if(strcmp(argv[1], "--help") == 0)
   {
-    printf("use: (./)brainfuck <path>\n\nExample:\n(./)brainfuck examples/helloworld1.bf\n");
+    printf("use: brainfuck <path>\n\nExample:\nbrainfuck examples/helloworld1.bf\n");
     return 0;
   }
 
@@ -66,10 +64,62 @@ int main(int argc, char **argv)
   while(*code)
   {
     // Read instruction
-    read_instruction(&code, &mem);
+    switch(*code)
+    {
+      case '>':
+        // Move right
+        ++mem;
+        break;
+      case '<':
+        // Move left
+        --mem;
+        break;
+      case '+':
+        // Increment cell
+        ++*mem;
+        break;
+      case '-':
+        // Decrement cell
+        --*mem;
+        break;
+      case '.':
+        // Output cell
+        printf("%c", *mem);
+        break;
+      case ',':
+        // Read input to cell
+        scanf("%c", mem);
+        break;
+      case '[':
+        if(*mem == 0)
+        // Go to next matching bracket ']'
+        {
+          int counter = 1;
+          while (*code != ']' || counter != 0 )
+          {
+            ++code;
+            if(*code == '[') counter++;
+            if(*code == ']') counter--;
+          }
+        }
+        break;
+      case ']':
+        if(*mem != 0)
+        // Go to previous matching bracket '['
+        {
+          int counter = 1;
+          while(*code != '[' || counter != 0 )
+          {
+            --code;
+            if(*code == ']') counter++;
+            if(*code == '[') counter--;
+          }
+        }
+        break;
+    }
 
     // Increment to next instruction
-    code++;
+    ++code;
   }
 
   return 0;
