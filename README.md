@@ -5,18 +5,18 @@ To get started, clone the repository and compile it (for example with `gcc`) to 
 ```sh
 $ git clone https://github.com/ergraff/brainfuck.git ~/brainfuck
 $ cd ~/brainfuck
-$ gcc main.c instructions.c -o brainfuck
+$ gcc main.c -o brainfuck
 ```
 
 To run the executable, give it the path to a file to interpret as a Brainfuck program.
-This is also given by `./brainfuck --help`:
+This is also given by `brainfuck --help`:
 
 ```sh
 $ ./brainfuck --help
-use: (./)brainfuck <path>
+use: brainfuck <path>
 
 Example:
-(./)brainfuck examples/helloworld1.bf
+brainfuck examples/helloworld1.bf
 $ ./brainfuck /path/to/file.bf
 ```
 
